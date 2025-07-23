@@ -44,9 +44,10 @@ st.markdown("Filtered view based on selected customers.")
 
 # KPI Summary
 col1, col2, col3 = st.columns(3)
-col1.metric("Total PO Amt", f"₹ {df_filtered['PO AMT'].sum():,.2f}")
+col1.metric("Total PO Amt", f"₹ {df_filtered['Total PO Amt'].sum():,.2f}")
 col2.metric("Total Billed", f"₹ {df_filtered['Billed Till Date'].sum():,.2f}")
 col3.metric("Open Billing", f"₹ {df_filtered['Open Billing'].sum():,.2f}")
+
 
 # Bar Chart - Customer-wise Billing
 fig1 = px.bar(df_filtered, x="Customer name", y="Billed Till Date", title="Customer-wise Billed Amount")
