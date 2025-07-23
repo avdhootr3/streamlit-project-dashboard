@@ -20,9 +20,15 @@ def load_data():
 
 df_main, df_open, df_month, df_ytd = load_data()
 
-# Ensure common key is consistent
+# Standardize SO column across sheets (e.g. "SO No" → "SO Number")
 for df in [df_main, df_open, df_month, df_ytd]:
-    df["SO Number"] = df["SO Number"].astype(str)
+    if "SO No" in df.columns:
+        df.rename(columns={"SO No": "SO Number"}, inplace=True)
+    if "SO Number" in df.columns:
+        df["SO Number"] = df["SO Number"].astype(str)
+    else:
+        st.warning("⚠️ 'SO Number' not found in one of the sheets. Please verify column headers.")
+
 
 # Merge datasets on "SO Number"
 df_merged = df_main.merge(df_open, on="SO Number", how="left", suffixes=("", "_open"))
