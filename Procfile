@@ -1,1 +1,2 @@
-web: streamlit run dashboard.py --server.port=$PORT --server.enableCORS=false
+web: streamlit run streamlit_app.py
+
